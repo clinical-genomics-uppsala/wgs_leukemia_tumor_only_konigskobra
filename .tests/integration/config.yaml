@@ -1,0 +1,141 @@
+resources: "resources.yaml"
+samples: "samples.tsv"
+units: "units.tsv"
+
+modules:
+  annotation: "develop"
+  cnv_sv: "develop"
+  compression: "v1.0.0"
+  parabricks: "v0.1.0"
+  prealignment: "v0.1.0"
+  qc: "919739fb6fec831137bd66d2ec624ec59baf868d"
+  misc: "v0.1.0"
+
+default_container: "docker://hydragenetics/common:0.1.0"
+
+reference:
+  fasta: "reference/reference.fasta"
+  fai: "reference/reference.fasta.fai"
+  genome_dir: "reference/"
+  sites: "reference/sites.vcf.gz"
+  wgs_intervals: "reference/wgs.interval_list"
+
+trimmer_software: "fastp_pe"
+
+cnvkit_batch:
+  container: "docker://marrip/cnvkit:0.9.9"
+  method: "wgs"
+  normal_reference: "reference/cnvkit.cnn"
+
+cnvkit_diagram:
+  container: "docker://marrip/cnvkit:0.9.9"
+
+cnvkit_call:
+  container: "docker://marrip/cnvkit:0.9.9"
+
+cnvkit_scatter:
+  container: "docker://marrip/cnvkit:0.9.9"
+  extra: "-c {locus} --y-min -10 --y-max 10"
+
+cnvkit_vcf:
+  container: "docker://python:3.9.9-slim-buster"
+
+config_manta_t:
+  container: "docker://marrip/manta:v1.6.0"
+
+fastp_pe:
+  container: "docker://hydragenetics/fastp:0.20.1"
+
+germline_vcf:
+  container: "docker://marrip/vep:104.3"
+  filter: '--filter "DP > 20" --filter "MAX_AF >= 0.001"'
+
+manta_run_workflow_t:
+  bed_files:
+    all: "reference/all.bed"
+    aml: "reference/aml.bed"
+  container: "docker://marrip/manta:v1.6.0"
+
+mosdepth:
+  by: "500"
+  container: "docker://hydragenetics/mosdepth:0.3.2"
+  extra: "--fast-mode --no-per-base"
+
+multiqc:
+  container: "docker://marrip/multiqc:1.11"
+  qc_files:
+    - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{read}.zip"
+    - "qc/mosdepth/{sample}_{type}.mosdepth.global.dist.txt"
+    - "qc/mosdepth/{sample}_{type}.mosdepth.region.dist.txt"
+    - "qc/mosdepth/{sample}_{type}.mosdepth.summary.txt"
+    - "qc/mosdepth/{sample}_{type}.regions.bed.gz"
+    - "qc/mosdepth/{sample}_{type}.regions.bed.gz.csi"
+    - "qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
+    - "qc/picard_collect_duplication_metrics/{sample}_{type}.duplication_metrics.txt"
+    - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.pdf"
+    - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.detail_metrics"
+    - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.summary_metrics"
+    - "qc/picard_collect_multiple_metrics/{sample}_{type}.alignment_summary_metrics"
+    - "qc/picard_collect_multiple_metrics/{sample}_{type}.base_distribution_by_cycle_metrics"
+    - "qc/picard_collect_multiple_metrics/{sample}_{type}.base_distribution_by_cycle.pdf"
+    - "qc/picard_collect_multiple_metrics/{sample}_{type}.insert_size_metrics"
+    - "qc/picard_collect_multiple_metrics/{sample}_{type}.insert_size_histogram.pdf"
+    - "qc/picard_collect_multiple_metrics/{sample}_{type}.quality_by_cycle_metrics"
+    - "qc/picard_collect_multiple_metrics/{sample}_{type}.quality_by_cycle.pdf"
+    - "qc/picard_collect_multiple_metrics/{sample}_{type}.quality_distribution_metrics"
+    - "qc/picard_collect_multiple_metrics/{sample}_{type}.quality_distribution.pdf"
+    - "qc/picard_collect_wgs_metrics/{sample}_{type}.txt"
+    - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
+
+pbrun_mutectcaller_t:
+  bed_files:
+    all: "reference/all.bed"
+    aml: "reference/aml.bed"
+
+picard_collect_alignment_summary_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_duplication_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_gc_bias_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_multiple_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+  output_ext:
+    - "alignment_summary_metrics"
+    - "base_distribution_by_cycle_metrics"
+    - "base_distribution_by_cycle.pdf"
+    - "insert_size_metrics"
+    - "insert_size_histogram.pdf"
+    - "quality_by_cycle_metrics"
+    - "quality_by_cycle.pdf"
+    - "quality_distribution_metrics"
+    - "quality_distribution.pdf"
+
+picard_collect_wgs_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+pindel_call:
+  bedfile: "reference/pindel.bed"
+  container: "docker://hydragenetics/pindel:0.2.5b9"
+
+pindel2vcf:
+  container: "docker://hydragenetics/pindel:0.2.5b9"
+
+simple_sv_annotation:
+  container: "docker://hydragenetics/simple_sv_annotation:2019.02.18"
+  panel: "reference/panel.txt"
+  fusion_pairs: "reference/fusion_pairs.txt"
+
+snpeff:
+  container: "docker://hydragenetics/snpeff:5.0"
+  db: "SnpEff/GRCh38.99"
+
+spring:
+  container: "docker://hydragenetics/spring:1.0.1"
+
+vep:
+  container: "docker://marrip/vep:104.3"
+  vep_cache: "reference/vep"
