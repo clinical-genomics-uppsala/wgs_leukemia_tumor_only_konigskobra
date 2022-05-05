@@ -142,8 +142,8 @@ use rule manta_run_workflow_t from cnv_sv as cnv_sv_manta_run_workflow_t with:
         ref=config["reference"]["fasta"],
         scrpt="cnv_sv/manta_run_workflow_t/{sample}/runWorkflow.py",
     output:
-        som_sv_vcf="cnv_sv/manta_run_workflow_t/{sample}/results/variants/somaticSV.vcf.gz",
-        som_sv_tbi="cnv_sv/manta_run_workflow_t/{sample}/results/variants/somaticSV.vcf.gz.tbi",
+        tum_sv_vcf="cnv_sv/manta_run_workflow_t/{sample}/results/variants/tumorSV.vcf.gz",
+        tum_sv_tbi="cnv_sv/manta_run_workflow_t/{sample}/results/variants/tumorSV.vcf.gz.tbi",
 
 
 use rule pindel_call from cnv_sv as cnv_sv_pindel_call with:
