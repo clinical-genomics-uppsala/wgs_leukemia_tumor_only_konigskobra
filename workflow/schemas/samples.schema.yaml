@@ -6,7 +6,7 @@ properties:
     description: sample id
   tumor_content:
     type: string
-    description: Tumor content
+    description: tumor content
 required:
   - sample
   - tumor_content
