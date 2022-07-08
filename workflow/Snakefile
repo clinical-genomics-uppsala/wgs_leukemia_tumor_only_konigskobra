@@ -5,8 +5,24 @@ __license__ = "GPL-3"
 
 
 include: "rules/common.smk"
+include: "rules/cp_results.smk"
 include: "rules/manta_to_tsv.smk"
 include: "rules/mutectcaller_to_tsv.smk"
+
+
+ruleorder: parabricks_pbrun_fq2bam > misc_samtools_index
+ruleorder: cnv_sv_manta_run_workflow_t > misc_tabix
+ruleorder: cnv_sv_manta_run_workflow_t > misc_bgzip
+ruleorder: cp_pindel_tbi > misc_tabix
+ruleorder: cp_manta_tbi > misc_tabix
+ruleorder: cp_manta_all_tbi > misc_tabix
+ruleorder: cp_manta_aml_tbi > misc_tabix
+ruleorder: cp_tbi_t > misc_tabix
+ruleorder: cp_all_tbi > misc_tabix
+ruleorder: cp_aml_tbi > misc_tabix
+ruleorder: cp_cnvkit_tbi > misc_tabix
+ruleorder: cp_crai > misc_samtools_index
+ruleorder: cp_cnvkit_diagram > misc_imagemagick_convert
 
 
 rule all:
@@ -313,8 +329,3 @@ use rule samtools_index from misc as misc_samtools_index with:
         )
     message:
         "{rule}: Index {wildcards.file}.crumble.cram file"
-
-
-ruleorder: parabricks_pbrun_fq2bam > misc_samtools_index
-ruleorder: cnv_sv_manta_run_workflow_t > misc_tabix
-ruleorder: cnv_sv_manta_run_workflow_t > misc_bgzip
