@@ -8,7 +8,7 @@ rule cp_vcf_t:
     input:
         "parabricks/pbrun_mutectcaller_t/{sample}_T.vep.vcf.gz",
     output:
-        "Results/{project}/{sample}/vcfs/{sample}_T.vep.vcf.gz",
+        "Results/{project}/{sample}/SNV_indels/{sample}_T.vep.vcf.gz",
     threads: config.get("cp_vcf_t", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_vcf_t", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -26,7 +26,7 @@ rule cp_tbi_t:
     input:
         "parabricks/pbrun_mutectcaller_t/{sample}_T.vep.vcf.gz.tbi",
     output:
-        "Results/{project}/{sample}/vcfs/{sample}_T.vep.vcf.gz.tbi",
+        "Results/{project}/{sample}/SNV_indels/{sample}_T.vep.vcf.gz.tbi",
     threads: config.get("cp_tbi_t", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_tbi_t", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -44,7 +44,7 @@ rule cp_all_vcf:
     input:
         "parabricks/pbrun_mutectcaller_t/{sample}_T.vep.all.vcf.gz",
     output:
-        "Results/{project}/{sample}/vcfs/{sample}_T.vep.all.vcf.gz",
+        "Results/{project}/{sample}/SNV_indels/{sample}_T.vep.all.vcf.gz",
     threads: config.get("cp_all_vcf", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_all_vcf", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -62,7 +62,7 @@ rule cp_all_tbi:
     input:
         "parabricks/pbrun_mutectcaller_t/{sample}_T.vep.all.vcf.gz.tbi",
     output:
-        "Results/{project}/{sample}/vcfs/{sample}_T.vep.all.vcf.gz.tbi",
+        "Results/{project}/{sample}/SNV_indels/{sample}_T.vep.all.vcf.gz.tbi",
     threads: config.get("cp_all_tbi", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_all_tbi", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -80,7 +80,7 @@ rule cp_aml_vcf:
     input:
         "parabricks/pbrun_mutectcaller_t/{sample}_T.vep.aml.vcf.gz",
     output:
-        "Results/{project}/{sample}/vcfs/{sample}_T.vep.aml.vcf.gz",
+        "Results/{project}/{sample}/SNV_indels/{sample}_T.vep.aml.vcf.gz",
     threads: config.get("cp_aml_vcf", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_aml_vcf", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -98,7 +98,7 @@ rule cp_aml_tbi:
     input:
         "parabricks/pbrun_mutectcaller_t/{sample}_T.vep.aml.vcf.gz.tbi",
     output:
-        "Results/{project}/{sample}/vcfs/{sample}_T.vep.aml.vcf.gz.tbi",
+        "Results/{project}/{sample}/SNV_indels/{sample}_T.vep.aml.vcf.gz.tbi",
     threads: config.get("cp_aml_tbi", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_aml_tbi", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -116,7 +116,7 @@ rule cp_cram:
     input:
         "compression/crumble/{sample}_T.crumble.cram",
     output:
-        "Results/{project}/{sample}/{sample}_T.crumble.cram",
+        "Results/{project}/{sample}/Cram/{sample}_T.crumble.cram",
     threads: config.get("cp_cram", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_cram", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -134,7 +134,7 @@ rule cp_crai:
     input:
         "compression/crumble/{sample}_T.crumble.cram.crai",
     output:
-        "Results/{project}/{sample}/{sample}_T.crumble.cram.crai",
+        "Results/{project}/{sample}/Cram/{sample}_T.crumble.cram.crai",
     threads: config.get("cp_crai", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_crai", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -152,7 +152,7 @@ rule cp_tsv_mutectcaller_all:
     input:
         "tsv_files/{sample}_mutectcaller_t.all.tsv",
     output:
-        "Results/{project}/{sample}/{sample}_mutectcaller_T.all.tsv",
+        "Results/{project}/{sample}/SNV_indels/{sample}_mutectcaller_T.all.tsv",
     threads: config.get("cp_tsv_mutectcaller_all", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_tsv_mutectcaller_all", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -172,7 +172,7 @@ rule cp_tsv_manta_all:
     input:
         "tsv_files/{sample}_manta_t.all.tsv",
     output:
-        "Results/{project}/{sample}/{sample}_manta_T.all.tsv",
+        "Results/{project}/{sample}/SV/{sample}_manta_T.all.tsv",
     threads: config.get("cp_tsv_manta_all", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_tsv_manta_all", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -190,7 +190,7 @@ rule cp_tsv_mutectcaller_aml:
     input:
         "tsv_files/{sample}_mutectcaller_t.aml.tsv",
     output:
-        "Results/{project}/{sample}/{sample}_mutectcaller_T.aml.tsv",
+        "Results/{project}/{sample}/SNV_indels/{sample}_mutectcaller_T.aml.tsv",
     threads: config.get("cp_tsv_mutectcaller_aml", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_tsv_mutectcaller_aml", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -210,7 +210,7 @@ rule cp_tsv_manta_aml:
     input:
         "tsv_files/{sample}_manta_t.aml.tsv",
     output:
-        "Results/{project}/{sample}/{sample}_manta_T.aml.tsv",
+        "Results/{project}/{sample}/SV/{sample}_manta_T.aml.tsv",
     threads: config.get("cp_tsv_manta_aml", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_tsv_manta_aml", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -228,7 +228,7 @@ rule cp_manta_vcf:
     input:
         "cnv_sv/manta_run_workflow_t/{sample}.ssa.vcf.gz",
     output:
-        "Results/{project}/{sample}/manta_t/{sample}_T.ssa.vcf.gz",
+        "Results/{project}/{sample}/SV/{sample}_T.ssa.vcf.gz",
     threads: config.get("cp_manta_vcf", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_manta_vcf", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -246,7 +246,7 @@ rule cp_manta_tbi:
     input:
         "cnv_sv/manta_run_workflow_t/{sample}.ssa.vcf.gz.tbi",
     output:
-        "Results/{project}/{sample}/manta_t/{sample}_T.ssa.vcf.gz.tbi",
+        "Results/{project}/{sample}/SV/{sample}_T.ssa.vcf.gz.tbi",
     threads: config.get("cp_manta_tbi", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_manta_tbi", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -264,7 +264,7 @@ rule cp_manta_all_vcf:
     input:
         "cnv_sv/manta_run_workflow_t/{sample}.ssa.all.vcf.gz",
     output:
-        "Results/{project}/{sample}/manta_t/{sample}_T.ssa.all.vcf.gz",
+        "Results/{project}/{sample}/SV/{sample}_T.ssa.all.vcf.gz",
     threads: config.get("cp_manta_all_vcf", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_manta_all_vcf", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -282,7 +282,7 @@ rule cp_manta_all_tbi:
     input:
         "cnv_sv/manta_run_workflow_t/{sample}.ssa.all.vcf.gz.tbi",
     output:
-        "Results/{project}/{sample}/manta_t/{sample}_T.ssa.all.vcf.gz.tbi",
+        "Results/{project}/{sample}/SV/{sample}_T.ssa.all.vcf.gz.tbi",
     threads: config.get("cp_manta_all_tbi", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_manta_all_tbi", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -301,7 +301,7 @@ rule cp_manta_aml_vcf:
     input:
         "cnv_sv/manta_run_workflow_t/{sample}.ssa.aml.vcf.gz",
     output:
-        "Results/{project}/{sample}/manta_t/{sample}_T.ssa.aml.vcf.gz",
+        "Results/{project}/{sample}/SV/{sample}_T.ssa.aml.vcf.gz",
     threads: config.get("cp_manta_aml_vcf", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_manta_aml_vcf", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -319,7 +319,7 @@ rule cp_manta_aml_tbi:
     input:
         "cnv_sv/manta_run_workflow_t/{sample}.ssa.aml.vcf.gz.tbi",
     output:
-        "Results/{project}/{sample}/manta_t/{sample}_T.ssa.aml.vcf.gz.tbi",
+        "Results/{project}/{sample}/SV/{sample}_T.ssa.aml.vcf.gz.tbi",
     threads: config.get("cp_manta_aml_tbi", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_manta_aml_tbi", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -337,7 +337,7 @@ rule cp_pindel_vcf:
     input:
         "cnv_sv/pindel/{sample}.vcf.gz",
     output:
-        "Results/{project}/{sample}/{sample}.pindel.vcf.gz",
+        "Results/{project}/{sample}/SNV_indels/{sample}.pindel.vcf.gz",
     threads: config.get("cp_pindel_vcf", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_pindel_vcf", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -355,7 +355,7 @@ rule cp_pindel_tbi:
     input:
         "cnv_sv/pindel/{sample}.vcf.gz.tbi",
     output:
-        "Results/{project}/{sample}/{sample}.pindel.vcf.gz.tbi",
+        "Results/{project}/{sample}/SNV_indels/{sample}.pindel.vcf.gz.tbi",
     threads: config.get("cp_pindel_tbi", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_pindel_tbi", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -373,7 +373,7 @@ rule cp_cnvkit_vcf:
     input:
         "cnv_sv/cnvkit_vcf/{sample}_T.vcf.gz",
     output:
-        "Results/{project}/{sample}/cnvkit/{sample}_T.vcf.gz",
+        "Results/{project}/{sample}/CNV/{sample}_T.vcf.gz",
     threads: config.get("cp_cnvkit_vcf", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_cnvkit_vcf", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -391,7 +391,7 @@ rule cp_cnvkit_tbi:
     input:
         "cnv_sv/cnvkit_vcf/{sample}_T.vcf.gz.tbi",
     output:
-        "Results/{project}/{sample}/cnvkit/{sample}_T.vcf.gz.tbi",
+        "Results/{project}/{sample}/CNV/{sample}_T.vcf.gz.tbi",
     threads: config.get("cp_cnvkit_tbi", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_cnvkit_tbi", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -409,7 +409,7 @@ rule cp_cnvkit_diagram:
     input:
         "cnv_sv/cnvkit_diagram/{sample}_T.png",
     output:
-        "Results/{project}/{sample}/cnvkit/{sample}_T.png",
+        "Results/{project}/{sample}/CNV/{sample}_T.png",
     threads: config.get("cp_cnvkit_diagram", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_cnvkit_diagram", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -427,7 +427,7 @@ rule cp_cnvkit_scatter:
     input:
         "cnv_sv/cnvkit_scatter/{sample}_T_chr{chr}.png",
     output:
-        "Results/{project}/{sample}/cnvkit/{sample}_T_chr{chr}.png",
+        "Results/{project}/{sample}/CNV/{sample}_T_chr{chr}.png",
     threads: config.get("cp_cnvkit_scatter", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_cnvkit_scatter", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
