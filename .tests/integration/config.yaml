@@ -4,8 +4,9 @@ units: "units.tsv"
 
 modules:
   annotation: "e58432c3467db31621ab51a16034a026cf2a2c84"
-  cnv_sv: "4b3f69ef0f0781b7943ca27ca16b940470c27118"
+  cnv_sv: "c81d30d"
   compression: "v1.1.0"
+  filtering: "b7f4dc3"
   parabricks: "v0.2.0"
   prealignment: "v0.2.0"
   qc: "ca81558181c16766674ddc9179e27928e87cc32b"
@@ -56,9 +57,8 @@ fastp_pe:
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
 
-germline_vcf:
-  container: "docker://marrip/vep:104.3"
-  filter: '--filter "DP > 20" --filter "MAX_AF >= 0.001"'
+filter_vcf:
+  germline: "config_germline_filter.yaml"
 
 imagemagick_convert:
   container: "docker://hydragenetics/imagemagick:7.1.0_20"
