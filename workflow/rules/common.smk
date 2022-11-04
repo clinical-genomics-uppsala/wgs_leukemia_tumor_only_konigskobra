@@ -52,6 +52,12 @@ def compile_output_list(wildcards):
     output_list = ["Results/MultiQC_T.html"]
     output_list.append(
         [
+            "Results/%s/%s/CNV/%s_T.CNV.xlsx" % (samples.loc[(sample)]["project"], sample, sample)
+            for sample in get_samples(samples)
+        ]
+    )
+    output_list.append(
+        [
             "Results/%s/%s/SNV_indels/%s_T.vep%s.vcf.gz%s" % (samples.loc[(sample)]["project"], sample, sample, diagnosis, ext)
             for sample in get_samples(samples)
             for diagnosis in ["", ".all", ".aml"]
