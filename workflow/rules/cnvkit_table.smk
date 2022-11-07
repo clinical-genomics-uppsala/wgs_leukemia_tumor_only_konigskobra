@@ -4,7 +4,6 @@ __email__ = "arielle.munters@scilifelab.uu.se"
 __license__ = "GPL-3"
 
 
-#localrules: cnvkit_table
 rule cnvkit_table:
     input:
         cns="cnv_sv/cnvkit_call/{sample}_{type}.loh.cns",
@@ -16,10 +15,10 @@ rule cnvkit_table:
         cnvkit_scattter_folder="cnv_sv/cnvkit_scatter/",
         extra=config.get("cnvkit_table", {}).get("extra", ""),
     log:
-        "cnv_sv/cnvkit_table/{sample}_{type}.output.log",
+        "cnv_sv/cnvkit_table/{sample}_{type}.CNV.xlsx.log",
     benchmark:
         repeat(
-            "cnv_sv/cnvkit_table/{sample}_{type}.output.benchmark.tsv",
+            "cnv_sv/cnvkit_table/{sample}_{type}.CNV.xlsx.benchmark.tsv",
             config.get("cnvkit_table", {}).get("benchmark_repeats", 1)
         )
     threads: config.get("cnvkit_table", {}).get("threads", config["default_resources"]["threads"])

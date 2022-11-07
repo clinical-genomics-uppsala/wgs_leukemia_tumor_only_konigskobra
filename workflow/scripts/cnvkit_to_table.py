@@ -66,8 +66,8 @@ for chromosome in chromosomes:
 
     image_path = snakemake.params.cnvkit_scattter_folder + '/' + sample + '_T_'+chromosome+'.png'
     worksheet.insert_image('A7', image_path)
-    worksheet.write_row('A20', relevant_cnvs_header, tablehead_format)
-    row = 20
+    worksheet.write_row('A29', relevant_cnvs_header, tablehead_format)
+    row = 29
     col = 0
     for line in relevant_cnvs[chromosome]:
         if (-0.25 < line[3] < 0.2):
