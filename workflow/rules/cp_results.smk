@@ -156,9 +156,7 @@ rule cp_tsv_mutectcaller_all:
     threads: config.get("cp_tsv_mutectcaller_all", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_tsv_mutectcaller_all", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
-        mem_per_cpu=config.get("cp_tsv_mutectcaller_all", {}).get(
-            "mem_per_cpu", config["default_resources"]["mem_per_cpu"]
-        ),
+        mem_per_cpu=config.get("cp_tsv_mutectcaller_all", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
         partition=config.get("cp_tsv_mutectcaller_all", {}).get("partition", config["default_resources"]["partition"]),
         threads=config.get("cp_tsv_mutectcaller_all", {}).get("threads", config["default_resources"]["threads"]),
         time=config.get("cp_tsv_mutectcaller_all", {}).get("time", config["default_resources"]["time"]),
@@ -194,9 +192,7 @@ rule cp_tsv_mutectcaller_aml:
     threads: config.get("cp_tsv_mutectcaller_aml", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_tsv_mutectcaller_aml", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
-        mem_per_cpu=config.get("cp_tsv_mutectcaller_aml", {}).get(
-            "mem_per_cpu", config["default_resources"]["mem_per_cpu"]
-        ),
+        mem_per_cpu=config.get("cp_tsv_mutectcaller_aml", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
         partition=config.get("cp_tsv_mutectcaller_aml", {}).get("partition", config["default_resources"]["partition"]),
         threads=config.get("cp_tsv_mutectcaller_aml", {}).get("threads", config["default_resources"]["threads"]),
         time=config.get("cp_tsv_mutectcaller_aml", {}).get("time", config["default_resources"]["time"]),
@@ -294,7 +290,6 @@ rule cp_manta_all_tbi:
         config.get("cp_manta_all_tbi", {}).get("container", config["default_container"])
     shell:
         "cp {input} {output}"
-
 
 
 rule cp_manta_aml_vcf:
@@ -407,9 +402,9 @@ rule cp_cnvkit_tbi:
 
 rule cp_cnvkit_table:
     input:
-        "cnv_sv/cnvkit_table/{sample}_T.CNV.xlsx"
+        "cnv_sv/cnvkit_table/{sample}_T.CNV.xlsx",
     output:
-        "Results/{project}/{sample}/CNV/{sample}_T.CNV.xlsx"
+        "Results/{project}/{sample}/CNV/{sample}_T.CNV.xlsx",
     threads: config.get("cp_cnvkit_table", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("cp_cnvkit_table", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -421,6 +416,7 @@ rule cp_cnvkit_table:
         config.get("cp_cnvkit_table", {}).get("container", config["default_container"])
     shell:
         "cp {input} {output}"
+
 
 rule cp_cnvkit_diagram:
     input:

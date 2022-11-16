@@ -83,13 +83,14 @@ use rule simple_sv_annotation from annotation as annotation_simple_sv_annotation
 
 
 module filtering:
-  snakefile:
-    github(
-        'hydra-genetics/filtering',
-        path='workflow/Snakefile',
-        tag=config["modules"]["filtering"],
-    )
-  config: config
+    snakefile:
+        github(
+            "hydra-genetics/filtering",
+            path="workflow/Snakefile",
+            tag=config["modules"]["filtering"],
+        )
+    config:
+        config
 
 
 use rule * from filtering as filtering_*
