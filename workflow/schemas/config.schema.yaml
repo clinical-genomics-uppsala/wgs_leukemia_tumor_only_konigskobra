@@ -187,19 +187,16 @@ properties:
     required:
       - container
 
-  germline_vcf:
+  filter_vcf:
     type: object
-    description: parameters for germline_vcf
+    description: parameters for filtering_vcf
     properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      filter:
+      filter_config:
         type: string
-        description: which filter options to apply
-    required:
-      - container
-      - filter
+        description: Config file specifying which filters should be applied.
 
   imagemagick_convert:
     type: object
@@ -455,7 +452,6 @@ required:
   - crumble
   - fastp_pe
   - fastqc
-  - germline_vcf
   - imagemagick_convert
   - manta_run_workflow_t
   - mosdepth

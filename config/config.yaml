@@ -4,8 +4,9 @@ units: "units.tsv"
 
 modules:
   annotation: "e58432c3467db31621ab51a16034a026cf2a2c84"
-  cnv_sv: "4b3f69ef0f0781b7943ca27ca16b940470c27118"
+  cnv_sv: "c81d30d"
   compression: "v1.1.0"
+  filtering: "b7f4dc3"
   parabricks: "v0.2.0"
   prealignment: "v0.2.0"
   qc: "ca81558181c16766674ddc9179e27928e87cc32b"
@@ -18,6 +19,7 @@ reference:
   fasta: ""
   sites: ""
   wgs_intervals: ""
+  design_intervals: "" #HSMetrics
 
 trimmer_software: "fastp_pe"
 
@@ -55,9 +57,8 @@ fastp_pe:
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
 
-germline_vcf:
-  container: "docker://marrip/vep:104.3"
-  filter: '--filter "DP > 20" --filter "MAX_AF >= 0.001"'
+filter_vcf:
+  germline: "config_germline_filter.yaml"
 
 imagemagick_convert:
   container: "docker://hydragenetics/imagemagick:7.1.0_20"
@@ -90,6 +91,7 @@ multiqc:
         - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.pdf"
         - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.detail_metrics"
         - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.summary_metrics"
+        # - "qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt" behover bed
         - "qc/picard_collect_multiple_metrics/{sample}_{type}.alignment_summary_metrics"
         - "qc/picard_collect_multiple_metrics/{sample}_{type}.base_distribution_by_cycle_metrics"
         - "qc/picard_collect_multiple_metrics/{sample}_{type}.base_distribution_by_cycle.pdf"
@@ -130,6 +132,9 @@ picard_collect_multiple_metrics:
     - "quality_distribution.pdf"
 
 picard_collect_wgs_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_update_vcf_sequence_dictionary:
   container: "docker://hydragenetics/picard:2.25.0"
 
 pindel_call:
