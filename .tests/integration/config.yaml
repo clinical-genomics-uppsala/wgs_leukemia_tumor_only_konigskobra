@@ -27,18 +27,18 @@ bedtools_intersect:
   extra: "-header"
 
 cnvkit_batch:
-  container: "docker://marrip/cnvkit:0.9.9"
+  container: "docker://hydragenetics/cnvkit:0.9.9"
   method: "wgs"
   normal_reference: "reference/cnvkit.cnn"
 
 cnvkit_call:
-  container: "docker://marrip/cnvkit:0.9.9"
+  container: "docker://hydragenetics/cnvkit:0.9.9"
 
 cnvkit_diagram:
-  container: "docker://marrip/cnvkit:0.9.9"
+  container: "docker://hydragenetics/cnvkit:0.9.9"
 
 cnvkit_scatter:
-  container: "docker://marrip/cnvkit:0.9.9"
+  container: "docker://hydragenetics/cnvkit:0.9.9"
   extra: "-c {locus} --y-min -10 --y-max 10"
 
 cnvkit_table:
@@ -48,7 +48,7 @@ cnvkit_vcf:
   container: "docker://python:3.9.9-slim-buster"
 
 config_manta_t:
-  container: "docker://marrip/manta:v1.6.0"
+  container: "docker://hydragenetics/manta:v1.6.0"
 
 crumble:
   container: "docker://hydragenetics/crumble:0.8.3"
@@ -70,7 +70,7 @@ manta_run_workflow_t:
   bed_files:
     all: "reference/all.bed"
     aml: "reference/aml.bed"
-  container: "docker://marrip/manta:v1.6.0"
+  container: "docker://hydragenetics/manta:v1.6.0"
 
 mosdepth:
   by: "500"
