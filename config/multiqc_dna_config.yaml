@@ -1,0 +1,67 @@
+decimalPoint_format: ','
+extra_fn_clean_exts: ##from this until end
+    - '.duplication_metrics'
+    - type: regex
+      pattern: '_fastq[12]'
+
+custom content:
+  order:
+    - qc-stats
+    - mosdepth
+    - fastqc
+    - fastp
+    # - peddy
+    - samtools
+    - picard
+
+table_columns_visible:
+  FastQC:
+    percent_duplicates: False
+    percent_gc: False
+    avg_sequence_length: True
+    percent_fails: False
+    total_sequences: True
+  fastp:
+    pct_adapter: True
+    pct_surviving: False
+    after_filtering_gc_content: False
+    filtering_result_passed_filter_reads: False
+    after_filtering_q30_bases: False
+    after_filtering_q30_rate: False
+    pct_duplication: False
+  mosdepth:
+    median_coverage: True
+    mean_coverage: False
+    1_x_pc: False
+    5_x_pc: False
+    10_x_pc: True
+    #20_x_pc: True
+    30_x_pc: True
+    50_x_pc: False
+  Peddy:
+    family_id: True
+    ancestry-prediction: False
+    ancestry-prob_het_check: False
+    sex_het_ratio: True
+    error_sex_check: True
+    predicted_sex_sex_check: True
+  Picard:
+    FOLD_80_BASE_PENALTY: True
+    PCT_PF_READS_ALIGNED: True
+    summed_median: False  # insert size
+    summed_mean: True  # insert size
+    PERCENT_DUPLICATION: True
+    MEDIAN_COVERAGE: False
+    MEAN_COVERAGE: False
+    SD_COVERAGE: False
+    PCT_30x: False
+    PCT_TARGET_BASES_30X: False
+    FOLD_ENRICHMENT: False
+  Samtools:
+    error_rate: False
+    non-primary_alignments: False
+    reads_mapped: False
+    reads_mapped_percent: True
+    reads_properly_paired_percent: True
+    reads_MQ0_percent: False
+    raw_total_sequences: True

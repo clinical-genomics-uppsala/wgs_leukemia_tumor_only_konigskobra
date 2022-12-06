@@ -84,6 +84,7 @@ multiqc:
   extra: "--sample-names qc/multiqc/sample_order.tsv"
   reports:
     DNA:
+      config: "reference/multiqc_config.yaml"
       included_unit_types: ['T']
       qc_files:
         - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.zip"
