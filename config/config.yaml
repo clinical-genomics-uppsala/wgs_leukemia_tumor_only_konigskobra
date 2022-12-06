@@ -91,7 +91,7 @@ multiqc:
         - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.pdf"
         - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.detail_metrics"
         - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.summary_metrics"
-        # - "qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt" behover bed
+        - "qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt" #behover bed
         - "qc/picard_collect_multiple_metrics/{sample}_{type}.alignment_summary_metrics"
         - "qc/picard_collect_multiple_metrics/{sample}_{type}.base_distribution_by_cycle_metrics"
         - "qc/picard_collect_multiple_metrics/{sample}_{type}.base_distribution_by_cycle.pdf"
@@ -116,6 +116,9 @@ picard_collect_duplication_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
 
 picard_collect_gc_bias_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_hs_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
 
 picard_collect_multiple_metrics:
