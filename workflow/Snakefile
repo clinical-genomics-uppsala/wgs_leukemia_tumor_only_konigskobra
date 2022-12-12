@@ -274,6 +274,7 @@ use rule multiqc from qc as qc_multiqc with:
         ),
         config=lambda wildcards: config["multiqc"]["reports"][wildcards.report]["config"],
         sample_order="qc/multiqc/sample_order.tsv",
+        sample_replacement="qc/multiqc/sample_replacement.tsv",
     output:
         html="qc/multiqc/multiqc_{report}.html",
         directory=directory("qc/multiqc/multiqc_{report}_data"),
