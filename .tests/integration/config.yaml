@@ -9,10 +9,10 @@ modules:
   filtering: "b7f4dc3"
   parabricks: "v0.2.0"
   prealignment: "v0.2.0"
-  qc: "178be68"
+  qc: "v0.2.0"
   misc: "v0.1.0"
 
-default_container: "docker://hydragenetics/common:0.1.4"
+default_container: "docker://hydragenetics/common:0.1.9"
 
 reference:
   fai: "reference/reference.fasta.fai"
@@ -81,7 +81,6 @@ mosdepth:
 
 multiqc:
   container: "docker://hydragenetics/multiqc:1.11"
-  extra: "--sample-names qc/multiqc/sample_order.tsv"
   reports:
     DNA:
       config: "reference/multiqc_config.yaml"

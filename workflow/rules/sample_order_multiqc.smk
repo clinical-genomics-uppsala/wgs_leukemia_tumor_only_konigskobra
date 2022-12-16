@@ -15,10 +15,7 @@ rule sample_order_multiqc:
     log:
         "qc/multiqc/sample_order.tsv.log",
     benchmark:
-        repeat(
-            "qc/multiqc/sample_order.tsv.benchmark.tsv",
-            config.get("sample_order_multiqc", {}).get("benchmark_repeats", 1)
-        )
+        repeat("qc/multiqc/sample_order.tsv.benchmark.tsv", config.get("sample_order_multiqc", {}).get("benchmark_repeats", 1))
     threads: config.get("sample_order_multiqc", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("sample_order_multiqc", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
