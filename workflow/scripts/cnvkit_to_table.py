@@ -42,7 +42,6 @@ with open(snakemake.input.cns, 'r+') as cnsfile:
             cnv_chr = cnv[cns_header.index('chromosome')]
             cnv_start = int(cnv[cns_header.index('start')])
             cnv_end = int(cnv[cns_header.index('end')])
-    #        import pdb; pdb.set_trace()
             cnv_baf = float_or_na(cnv[cns_header.index('baf')])
             if (cnv_end - cnv_start) >= 100000:
                 outline = [cnv_chr, cnv_start, cnv_end, float(cnv[cns_header.index('log2')]), cnv_baf,

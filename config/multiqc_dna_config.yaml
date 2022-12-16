@@ -40,10 +40,10 @@ table_columns_visible:
     30_x_pc: True
     50_x_pc: True
   Peddy:
-    family_id: True
+    family_id: False
     ancestry-prediction: False
     ancestry-prob_het_check: False
-    sex_het_ratio: True
+    sex_het_ratio: False
     error_sex_check: True
     predicted_sex_sex_check: True
   Picard:
@@ -80,13 +80,6 @@ multiqc_cgs:
       title: "Bases on Target"
       description: "On+Near Bait Bases / PF Bases Aligned from Picard HsMetrics"
       format: "{:.2%}"
-    STANDARD_DEVIATION:
-      title: "Insert size s.d."
-      description: "Insert size standard deviation from Picard"
-      min: 0
-      max: 150
-      scale: "RdYlGn-rev"
-      format: "{:.1f}"
     ZERO_CVG_TARGETS_PCT:
       title: "Target bases with zero coverage [%]"
       description: "Target bases with zero coverage [%] from Picard"
@@ -102,7 +95,7 @@ multiqc_cgs:
       max: 60
       scale: "RdYlGn"
   mosdepth:
-     20_x_pc: #Cant get it to work why?
+     20_x_pc: #Cant get it to work
         title: "20x percent"
         description: "Fraction of genome with at least 20X coverage"
         max: 100
@@ -113,34 +106,41 @@ multiqc_cgs:
 # Galler alla kolumner oberoende pa module!
 table_columns_placement:
   mosdepth:
-    median_coverage: 504
-    # 1_x_pc: 601
-    # 5_x_pc: 602
-    10_x_pc: 603
-    20_x_pc: 604
-    30_x_pc: 605
-    50_x_pc: 606
+    median_coverage: 601
+    1_x_pc: 666
+    5_x_pc: 666
+    10_x_pc: 602
+    20_x_pc: 603
+    30_x_pc: 604
+    50_x_pc: 605
   Samtools:
     raw_total_sequences: 500
     reads_mapped: 501
     reads_mapped_percent: 502
-    reads_properly_paired_percent: 800
-    # error_rate: 700
-    # reads_MQ0_percent: 700
-    # non-primary_alignments: 700
+    reads_properly_paired_percent: 503
+    average_quality: 504
+    error_rate: 555
+    reads_MQ0_percent: 555
+    non-primary_alignments: 555
+  Peddy:
+    ancestry-prediction: 777
+    ancestry-prob_het_check: 777
+    sex_het_ratio: 777
+    error_sex_check: 701
+    predicted_sex_sex_check: 702
+    family_id: 703
   Picard:
-    PCT_SELECTED_BASES: 902
-    FOLD_80_BASE_PENALTY: 701
-    # PCT_PF_READS_ALIGNED: 901
-    # summed_median: 949
-    summed_mean: 950
-    STANDARD_DEVIATION: 951
-    PERCENT_DUPLICATION: 505
-    # MEDIAN_COVERAGE: 1000
-    # MEAN_COVERAGE: 1000
-    # SD_COVERAGE: 1001
-    # PCT_30X: 1002
-    # PCT_TARGET_BASES_30X: 1003
-    # FOLD_ENRICHMENT: 1000
-    ZERO_CVG_TARGETS_PCT: 1100
-  #fastp
+    PCT_SELECTED_BASES: 801
+    FOLD_80_BASE_PENALTY: 802
+    PCT_PF_READS_ALIGNED: 888
+    summed_median: 888
+    PERCENT_DUPLICATION: 803
+    summed_mean: 804
+    STANDARD_DEVIATION: 805
+    ZERO_CVG_TARGETS_PCT: 888
+    MEDIAN_COVERAGE: 888
+    MEAN_COVERAGE: 888
+    SD_COVERAGE: 888
+    PCT_30X: 888
+    PCT_TARGET_BASES_30X: 888
+    FOLD_ENRICHMENT: 888
