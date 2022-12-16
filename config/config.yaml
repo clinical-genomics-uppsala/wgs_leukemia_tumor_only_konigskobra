@@ -165,5 +165,5 @@ spring:
   container: "docker://hydragenetics/spring:1.0.1"
 
 vep:
-  container: "docker://marrip/vep:104.3"
+  container: "docker://hydragenetics/vep:105"
   vep_cache: ""
