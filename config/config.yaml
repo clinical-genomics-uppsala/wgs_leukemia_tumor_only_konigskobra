@@ -27,25 +27,25 @@ bedtools_intersect:
   extra: "-header"
 
 cnvkit_batch:
-  container: "docker://marrip/cnvkit:0.9.9"
+  container: "docker://hydragenetics/cnvkit:0.9.9"
   method: "wgs"
   normal_reference: ""
 
 cnvkit_call:
-  container: "docker://marrip/cnvkit:0.9.9"
+  container: "docker://hydragenetics/cnvkit:0.9.9"
 
 cnvkit_diagram:
-  container: "docker://marrip/cnvkit:0.9.9"
+  container: "docker://hydragenetics/cnvkit:0.9.9"
 
 cnvkit_scatter:
-  container: "docker://marrip/cnvkit:0.9.9"
-  extra: "-c {locus} --y-min -10 --y-max 10"
+  container: "docker://hydragenetics/cnvkit:0.9.9"
+  extra: "-c {locus} --y-min -5 --y-max 5"
 
 cnvkit_vcf:
   container: "docker://python:3.9.9-slim-buster"
 
 config_manta_t:
-  container: "docker://marrip/manta:v1.6.0"
+  container: "docker://hydragenetics/manta:v1.6.0"
 
 crumble:
   container: "docker://hydragenetics/crumble:0.8.3"
@@ -67,7 +67,7 @@ manta_run_workflow_t:
   bed_files:
     all: ""
     aml: ""
-  container: "docker://marrip/manta:v1.6.0"
+  container: "docker://hydragenetics/manta:v1.6.0"
 
 mosdepth:
   by: "500"
@@ -81,6 +81,7 @@ multiqc:
       config: "config/multiqc_dna_config.yaml"
       included_unit_types: ['T']
       qc_files:
+        - "prealignment/fastp_pe/{sample}_{flowcell}_{lane}_{barcode}_{type}.json"
         - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.zip"
         - "qc/mosdepth/{sample}_{type}.mosdepth.global.dist.txt"
         - "qc/mosdepth/{sample}_{type}.mosdepth.region.dist.txt"

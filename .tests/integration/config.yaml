@@ -21,7 +21,7 @@ reference:
   sites: "reference/sites.vcf.gz"
   design_bed: "reference/wgs.bed"
   wgs_intervals: "reference/wgs.interval_list"
-  design_intervals: "reference/wgs.interval_list"
+  design_intervals: "reference/wgs.interval_list" #hsmetrics
 
 trimmer_software: "fastp_pe"
 
@@ -41,7 +41,7 @@ cnvkit_diagram:
 
 cnvkit_scatter:
   container: "docker://hydragenetics/cnvkit:0.9.9"
-  extra: "-c {locus} --y-min -10 --y-max 10"
+  extra: "-c {locus} --y-min -5 --y-max 5"
 
 cnvkit_table:
   bedfile: "reference/all.bed"
@@ -86,6 +86,7 @@ multiqc:
       config: "reference/multiqc_config.yaml"
       included_unit_types: ['T']
       qc_files:
+        - "prealignment/fastp_pe/{sample}_{flowcell}_{lane}_{barcode}_{type}.json"
         - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.zip"
         - "qc/mosdepth/{sample}_{type}.mosdepth.global.dist.txt"
         - "qc/mosdepth/{sample}_{type}.mosdepth.region.dist.txt"
