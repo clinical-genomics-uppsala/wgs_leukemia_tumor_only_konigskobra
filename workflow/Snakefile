@@ -9,6 +9,7 @@ include: "rules/cnvkit_table.smk"
 include: "rules/cp_results.smk"
 include: "rules/manta_to_tsv.smk"
 include: "rules/mutectcaller_to_tsv.smk"
+include: "rules/sample_order_multiqc.smk"
 
 
 ruleorder: parabricks_pbrun_fq2bam > misc_samtools_index
@@ -259,9 +260,28 @@ use rule mosdepth from qc as qc_mosdepth with:
 
 
 use rule multiqc from qc as qc_multiqc with:
-    output:
-        html="qc/multiqc/multiqc_{report}.html",
-        directory=directory("qc/multiqc/multiqc_{report}_data"),
+    input:
+        files=lambda wildcards: set(
+            [
+                file.format(sample=sample, type=u.type, lane=u.lane, flowcell=u.flowcell, barcode=u.barcode, read=read, ext=ext)
+                for file in config["multiqc"]["reports"][wildcards.report]["qc_files"]
+                for sample in get_samples(samples)
+                for u in units.loc[sample].dropna().itertuples()
+                if u.type in config["multiqc"]["reports"][wildcards.report]["included_unit_types"]
+                for read in ["fastq1", "fastq2"]
+                for ext in config.get("picard_collect_multiple_metrics", {}).get("output_ext", [""])
+            ]
+        ),
+        config=lambda wildcards: config["multiqc"]["reports"][wildcards.report]["config"],
+        sample_replacement="qc/multiqc/sample_replacement.tsv",
+        sample_order="qc/multiqc/sample_order.tsv",
+    params:
+        extra=lambda wildcards, input: "--replace-names "
+        + input.sample_replacement
+        + " --sample-names "
+        + input.sample_order
+        + " -c "
+        + input.config,
 
 
 use rule picard_collect_alignment_summary_metrics from qc as qc_picard_alignment_summary_metrics with:
@@ -279,6 +299,14 @@ use rule picard_collect_gc_bias_metrics from qc as qc_picard_collect_gc_bias_met
     input:
         bam="parabricks/pbrun_fq2bam/{sample}_{type}.bam",
         ref=config["reference"]["fasta"],
+
+
+use rule picard_collect_hs_metrics from qc as qc_picard_collect_hs_metrics with:
+    input:
+        bam="parabricks/pbrun_fq2bam/{sample}_{type}.bam",
+        bait_intervals=config["reference"]["design_intervals"],
+        reference=config["reference"]["fasta"],
+        target_intervals=config["reference"]["design_intervals"],
 
 
 use rule picard_collect_multiple_metrics from qc as qc_picard_collect_multiple_metrics with:

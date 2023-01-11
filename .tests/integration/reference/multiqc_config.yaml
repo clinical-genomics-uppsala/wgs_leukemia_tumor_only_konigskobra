@@ -1,0 +1,15 @@
+decimalPoint_format: ','
+extra_fn_clean_exts: ##from this until end
+    - '.duplication_metrics'
+    - type: regex
+      pattern: '_fastq[12]'
+
+custom content:
+  order:
+    - qc-stats
+    - mosdepth
+    - fastqc
+    - fastp
+    # - peddy
+    - samtools
+    - picard
