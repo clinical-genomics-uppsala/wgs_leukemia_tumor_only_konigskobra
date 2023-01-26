@@ -72,16 +72,26 @@ workbook = xlsxwriter.Workbook(snakemake.output[0])
 heading_format = workbook.add_format({'bold': True, 'font_size': 18})
 tablehead_format = workbook.add_format({'bold': True, 'text_wrap': True})
 red_format = workbook.add_format({'font_color': 'red'})
+worksheet_whole = workbook.add_worksheet("Whole genome")
+worksheet_whole.set_column('B:E', 10)
+worksheet_whole.write('A1', 'CNVkit calls', heading_format)
+worksheet_whole.write('A3', 'Sample: ' + str(sample))
+worksheet_whole.write('A4', 'Tumor content: ' + str(snakemake.params.tc))
+worksheet_whole.write('A7', 'Calls larger then 100kb or in CNA bedfile included')
+worksheet_whole.write('A8', 'Calls with log2 values inbetween ' + str(low_log) + ' and ' + str(high_log) +
+                      ' are to be considered uncertain.', red_format)
+image_path = snakemake.params.cnvkit_scatter_folder + '/' + sample + '_T'+'.png'
+worksheet.insert_image('A8', image_path)
 # create sheets for each chromosome
 for chromosome in chromosomes:
     worksheet = workbook.add_worksheet(chromosome)
     worksheet.set_column('B:E', 10)
-    worksheet.write('A1', 'CNVkit calls for '+chromosome, heading_format)
+    worksheet.write('A1', 'CNVkit calls for ' + chromosome, heading_format)
     worksheet.write('A3', 'Sample: '+str(sample))
     worksheet.write('A5', 'Calls larger then 100kb or in CNA bedfile included')
-    worksheet.write('A6', 'Calls with log2 values inbeteen '+str(low_log)+' and '+str(high_log), red_format)
+    worksheet.write('A6', 'Calls with log2 values inbetween ' + str(low_log) + ' and ' + str(high_log), red_format)
 
-    image_path = snakemake.params.cnvkit_scattter_folder + '/' + sample + '_T_'+chromosome+'.png'
+    image_path = snakemake.params.cnvkit_scatter_folder + '/' + sample + '_T_' + chromosome + '.png'
     worksheet.insert_image('A8', image_path)
     worksheet.write_row('A30', relevant_cnvs_header, tablehead_format)
     row = 30
