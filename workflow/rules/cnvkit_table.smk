@@ -16,6 +16,8 @@ rule cnvkit_table:
         temp("cnv_sv/cnvkit_table/{sample}_{type}.CNV.xlsx"),
     params:
         cnvkit_scattter_folder="cnv_sv/cnvkit_scatter/",
+        log=config.get("cnvkit_table", {}).get("log_thresholds", "-0.25,0.2"),
+        ploidy=config.get("cnvkit_table", {}).get("ploidy", "2"),
         extra=config.get("cnvkit_table", {}).get("extra", ""),
     log:
         "cnv_sv/cnvkit_table/{sample}_{type}.CNV.xlsx.log",
