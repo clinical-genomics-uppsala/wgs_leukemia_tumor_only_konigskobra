@@ -42,6 +42,10 @@ cnvkit_scatter:
   container: "docker://hydragenetics/cnvkit:0.9.9"
   extra: "-c {locus} --y-min -5 --y-max 5"
 
+cnvkit_scatter_whole:
+  container: "docker://hydragenetics/cnvkit:0.9.9"
+  extra: " --y-min -5 --y-max 5"
+
 cnvkit_table:
   bedfile: ""
   container: ""
