@@ -1,6 +1,6 @@
-__author__ = "Arielle R Munters"
+__author__ = "Arielle R Munters, Nina Hollfelder"
 __copyright__ = "Copyright 2022, Arielle R Munters"
-__email__ = "arielle.munters@scilifelab.u.se"
+__email__ = "arielle.munters@scilifelab.uu.se, nina.hollfelder@scilifelab.uu.se"
 __license__ = "GPL-3"
 
 
@@ -15,6 +15,7 @@ localrules:
     cp_crai,
     cp_tsv_mutectcaller_all,
     cp_tsv_manta_all,
+    cp_tsv_manta_no_diagnosis,
     cp_tsv_mutectcaller_aml,
     cp_tsv_manta_aml,
     cp_manta_vcf,
@@ -215,6 +216,24 @@ rule cp_tsv_manta_all:
         "cp {input} {output}"
 
 
+rule cp_tsv_manta_no_diagnosis:
+    input:
+        "tsv_files/{sample}_manta_t.tsv",
+    output:
+        "Results/{project}/{sample}/SV/{sample}_manta_T.tsv",
+    threads: config.get("cp_tsv_manta_no_diagnosis", {}).get("threads", config["default_resources"]["threads"])
+    resources:
+        mem_mb=config.get("cp_tsv_manta_no_diagnosis", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("cp_tsv_manta_no_diagnosis", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("cp_tsv_manta_no_diagnosis", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("cp_tsv_manta_no_diagnosis", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("cp_tsv_manta_no_diagnosis", {}).get("time", config["default_resources"]["time"]),
+    container:
+        config.get("cp_tsv_manta_no_diagnosis", {}).get("container", config["default_container"])
+    shell:
+        "cp {input} {output}"
+
+
 rule cp_tsv_mutectcaller_aml:
     input:
         "tsv_files/{sample}_mutectcaller_t.aml.tsv",
@@ -304,7 +323,7 @@ rule cp_manta_all_vcf:
     shell:
         "cp {input} {output}"
 
-
+        
 rule cp_manta_all_tbi:
     input:
         "cnv_sv/manta_run_workflow_t/{sample}.ssa.all.vcf.gz.tbi",
