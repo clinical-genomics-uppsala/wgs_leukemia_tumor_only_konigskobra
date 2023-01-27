@@ -85,9 +85,12 @@ def compile_output_list(wildcards):
             for ext in ["", ".tbi"]
         ]
     )
-
     output_list.append(
-        ["Results/%s/%s/CNV/%s_T.png" % (samples.loc[(sample)]["project"], sample, sample) for sample in get_samples(samples)]
+        [
+            "Results/%s/%s/CNV/%s_T%s.png" % (samples.loc[(sample)]["project"], sample, sample, ext)
+            for sample in get_samples(samples)
+            for ext in ["", "_diagram"]
+        ]
     )
     output_list.append(
         [
