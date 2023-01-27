@@ -323,7 +323,7 @@ rule cp_manta_all_vcf:
     shell:
         "cp {input} {output}"
 
-        
+
 rule cp_manta_all_tbi:
     input:
         "cnv_sv/manta_run_workflow_t/{sample}.ssa.all.vcf.gz.tbi",
