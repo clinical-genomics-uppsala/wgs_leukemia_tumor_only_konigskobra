@@ -49,6 +49,7 @@ cnvkit_scatter_whole:
 cnvkit_table:
   bedfile: ""
   container: ""
+  cyto_coordinates: ""
   log_thresholds: ""
   ploidy: ""
 
